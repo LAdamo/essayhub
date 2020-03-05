@@ -407,6 +407,7 @@ function stealDetails() {
                 snapshot.forEach(childsnapshot => {
                 const detail = childsnapshot.val();
                 for (const value of values) {
+                    console.log(ids[i], value)
                 if(ids[i] === value) {
                 name =  detail.name;
                  }    
