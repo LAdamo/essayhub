@@ -412,19 +412,19 @@ function stealDetails() {
               for (i = 0; i < keys.length; i = i +1) {
                 firebase.database().ref("/details").once("value").then(snapshot => {
                 const ids = Object.keys(snapshot.val());
-                let i = 0;
+                let x = 0;
                 snapshot.forEach(childsnapshot => {
                 const detail = childsnapshot.val();
                 for (const value of values) {
-                    console.log(ids[i], value.id)
-                if(ids[i] === value.id) {
+                    console.log(ids[x], value.id)
+                if(ids[x] === value.id) {
                 name =  detail.name;
                 console.log(name, detail)
                  }
                 }
 
 
-                 i++;
+                 x++;
                 })
                 }).then(() => {
                   keys[i]=keys[i].substr(1)
@@ -444,14 +444,15 @@ function stealDetails() {
               +'<div style="margin-top:10px;"><button class="btn"><i class="small material-icons">thumb_up</i></button>'
               + '<button class="btn"><i class="small material-icons">thumb_down</i></button>'
               + "</div></div>"
-                });
+              });
 
 
               }
-              mystr = mystr + "</div>"
+           }).then(() => {
+            mystr = mystr + "</div>"
 
 
-              stuff.innerHTML = mystr; // Makes text appear in the body of the webpage
+            stuff.innerHTML = mystr; // Makes text appear in the body of the webpage
            });
            },3000);
 
