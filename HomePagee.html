@@ -421,11 +421,13 @@ function stealDetails() {
                 name =  detail.name;
                 console.log(name, detail)
                  }
-                };
+                }
+
+
                  i++;
-                });
-              }).then(() => {
-                keys[i]=keys[i].substr(1)
+                })
+                }).then(() => {
+                  keys[i]=keys[i].substr(1)
               mystr = mystr
               + "<div style='background: grey; color: white; margin: 5px; padding: 5px;'><img src='"
               + values[i].photo
@@ -442,13 +444,14 @@ function stealDetails() {
               +'<div style="margin-top:10px;"><button class="btn"><i class="small material-icons">thumb_up</i></button>'
               + '<button class="btn"><i class="small material-icons">thumb_down</i></button>'
               + "</div></div>"
+                });
 
+
+              }
               mystr = mystr + "</div>"
 
 
               stuff.innerHTML = mystr; // Makes text appear in the body of the webpage
-              });
-
            });
            },3000);
 
