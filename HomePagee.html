@@ -399,6 +399,23 @@ function stealDetails() {
               }
                keys = Object.keys(snapshot.val());
                values = Object.values(snapshot.val());
+               let name; 
+               
+               firebase.database().ref("/details").once("value").then(snapshot => {
+                const ids = Object.keys(snapshot.val());
+                let i = 0;
+                snapshot.forEach(childsnapshot => {
+                const detail = childsnapshot.val();
+                for (const value of values) {
+                if(ids[i] === value) {
+                name =  detail.name;
+                 }    
+                }
+                    
+                
+                 i++;'
+                });
+                });
 
 
               mystr = ""
@@ -415,7 +432,7 @@ function stealDetails() {
               + values[i].photo
               + "'width=60>" 
 
-              + '<div style="margin-top:10px;">' + values[i].name + '</div>'
+              + '<div style="margin-top:10px;">' + name + '</div>'
               
               + '<div style="margin-top:10px;">' + values[i].tweet + '</div>'
 
