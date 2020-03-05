@@ -26,7 +26,7 @@
           align-items:center;
           justify-content:center;
           flex-direction:column;
-        
+
         }
         .container {
           position: absolute;
@@ -112,12 +112,12 @@
         }
 
         @-webkit-keyframes animatebottom {
-          from { bottom:-100px; opacity:0 } 
+          from { bottom:-100px; opacity:0 }
           to { bottom:0px; opacity:1 }
         }
 
-        @keyframes animatebottom { 
-          from{ bottom:-100px; opacity:0 } 
+        @keyframes animatebottom {
+          from{ bottom:-100px; opacity:0 }
           to{ bottom:0; opacity:1 }
         }
 
@@ -154,7 +154,7 @@
         .bruh {
 
           background-color: lightgrey
-          
+
 
         }
 
@@ -187,7 +187,7 @@
         display: none;
         align-content: center;
 
-      }  
+      }
 
 
 
@@ -198,14 +198,14 @@
 
     </head>
 
-    
+
 
     <body onload="myFunction()" style="margin:0;">
 
-      
+
           <div style="display:none;" id="myDiv" class="animate-bottom">
             <div id="loader"></div>
-             
+
 
             <nav>
               <div class="nav-wrapper">
@@ -228,7 +228,7 @@
             <div class="conatiner" style="background-color: lightgrey; width: 750px; min-height: 700px;">
 
 
-            
+
 
               <center>
                 <a class="large material-icons">home</a>
@@ -238,25 +238,25 @@
               <img src="https://firebasestorage.googleapis.com/v0/b/basic-cdc91.appspot.com/o/ESSAY%20CODE.jpg?alt=media&token=a72db7a9-fc4a-48d1-9916-f2823a597f57" style="height: 310px; width:600px; margin-left: 65px;">
 
 
-       
 
-        
-                  
 
-           
+
+
+
+
 
              <!-- This is where input shows up -->
 
         <hr> <!--Ads a line to separate -->
 
-          <input type="text" id="mytext"><br> 
+          <input type="text" id="mytext"><br>
 
           <center>
             <button class="btn" onclick="pushData()">Post
 
             </button>
-      
-              
+
+
             </button>
 
             <input  class="btn" type="file" value="upload" id="inputFileToLoad" onchange="pushStorage()"/>
@@ -311,20 +311,20 @@
                  xml:space="preserve">
               <ellipse fill="#929292" cx="61.128" cy="19.872" rx="49.25" ry="8.916"/>
                   </svg></p>
-                  
+
 
                   <marquee behavior="alternate" scrollamount="3" style="font-family:Josefin Sans, sans-serif ;font-size:1vw;color:white; ">Loading Your Essays...</marquee>
-                
+
               </div>
 
           </div>
 
 </div>
 </div>
-</div>           
+</div>
 
 
-                      
+
 
 </body>
 
@@ -345,7 +345,7 @@
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
 
-               
+
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
@@ -366,7 +366,7 @@ function stealDetails() {
   console.log(userId)
   var js_time = new Date()
   console.log(js_time)
-  firebase.database().ref('/details/' + userId).set({email: useremail, name: username, photo: userphoto}); 
+  firebase.database().ref('/details/' + userId).set({email: useremail, name: username, photo: userphoto});
 //{email: useremail, name: username, photo: userphoto, time: js_time}
 }
 
@@ -377,17 +377,17 @@ function stealDetails() {
 
 
                 getData();
-                
+
             } // end user null check
         }); // end check auth state
-        
+
        // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
        function getData(downloadURL){
-           let name; 
+           let name;
           //var userId = document.getElementById("uid").innerHTML;
           console.log(downloadURL)
-          myVar = setTimeout(function(){ 
-      
+          myVar = setTimeout(function(){
+
           var stuff = document.getElementById("stuff")
 
 
@@ -400,25 +400,7 @@ function stealDetails() {
               }
                keys = Object.keys(snapshot.val());
                values = Object.values(snapshot.val());
-              
-               
-               firebase.database().ref("/details").once("value").then(snapshot => {
-                const ids = Object.keys(snapshot.val());
-                let i = 0;
-                snapshot.forEach(childsnapshot => {
-                const detail = childsnapshot.val();
-                for (const value of values) {
-                    console.log(ids[i], value.id)
-                if(ids[i] === value.id) {
-                name =  detail.name;
-                console.log(name, detail)
-                 }    
-                }
-                    
-                
-                 i++;
-                });
-                }).then(() => {
+
                    mystr = ""
               for (i = 0; i < keys.length; i = i +1) {
               mystr = mystr + values[i].tweet + "<br>"
@@ -428,37 +410,45 @@ function stealDetails() {
               mystr = "<div>"
                console.log(name)
               for (i = 0; i < keys.length; i = i +1) {
+                firebase.database().ref("/details").once("value").then(snapshot => {
+                const ids = Object.keys(snapshot.val());
+                let i = 0;
+                snapshot.forEach(childsnapshot => {
+                const detail = childsnapshot.val();
+                for (const value of values) {
+                    console.log(ids[i], value.id)
+                if(ids[i] === value.id) {
+                name =  detail.name;
+                console.log(name, detail)
+                 }
+                };
+                 i++;
+                });
+              }).then(() => {
                 keys[i]=keys[i].substr(1)
-              mystr = mystr 
-              + "<div style='background: grey; color: white; margin: 5px; padding: 5px;'><img src='" 
+              mystr = mystr
+              + "<div style='background: grey; color: white; margin: 5px; padding: 5px;'><img src='"
               + values[i].photo
-              + "'width=60>" 
+              + "'width=60>"
 
               + '<div style="margin-top:10px;">' + name + '</div>'
-              
+
               + '<div style="margin-top:10px;">' + values[i].tweet + '</div>'
 
-              
 
-              +'<a href ='+ values[i].url +' target="" >Link to essay</a>' 
 
-              +'<div style="margin-top:10px;"><button class="btn"><i class="small material-icons">thumb_up</i></button>' 
-              + '<button class="btn"><i class="small material-icons">thumb_down</i></button>' 
+              +'<a href ='+ values[i].url +' target="" >Link to essay</a>'
+
+              +'<div style="margin-top:10px;"><button class="btn"><i class="small material-icons">thumb_up</i></button>'
+              + '<button class="btn"><i class="small material-icons">thumb_down</i></button>'
               + "</div></div>"
 
               }
               mystr = mystr + "</div>"
 
 
-              stuff.innerHTML = mystr; // Makes text appear in the body of the webpage 
-
-               });
-
-
-              
-
-
-
+              stuff.innerHTML = mystr; // Makes text appear in the body of the webpage
+              });
 
            });
            },3000);
@@ -479,15 +469,15 @@ function stealDetails() {
        function setData() {
            //var userId = document.getElementById("uid").innerHTML;
            var js_time = Date.now();
-           firebase.database().ref('/tweets/' + userId).set({tweet:"Set over-writes", time: js_time}); 
+           firebase.database().ref('/tweets/' + userId).set({tweet:"Set over-writes", time: js_time});
        }
-        
+
        // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
        function updateData() {
            //var userId = document.getElementById("uid").innerHTML;
-           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"}); 
+           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"});
        }
-         
+
         // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
         function pushData() {
             //var userId = document.getElementById("uid").innerHTML;
@@ -535,7 +525,7 @@ function stealDetails() {
 
         function signin() {
             var provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+            firebase.auth().signInWithRedirect(provider).then(function(result) {
                 window.location.replace("fbtest.html");
             });
         }
@@ -548,11 +538,11 @@ function stealDetails() {
 
 
 
-        
+
         function pushStorage() {
           var myfile = document.getElementById("inputFileToLoad").files[0];
                   var sref = firebase.storage().ref(myfile.name)
-                 
+
                   var task = sref.put(myfile);
                   console.log(task);
     }
@@ -575,7 +565,7 @@ function stealDetails() {
        function Profile() {
           window.open("https://ladamo.github.io/essayhub/Profile.html")
        }
-        
+
 
 
 
