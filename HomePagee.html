@@ -382,7 +382,8 @@ function stealDetails() {
         }); // end check auth state
         
        // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
-       function getData(downloadURL) {
+       function getData(downloadURL){
+           let name; 
           //var userId = document.getElementById("uid").innerHTML;
           console.log(downloadURL)
           myVar = setTimeout(function(){ 
@@ -399,7 +400,7 @@ function stealDetails() {
               }
                keys = Object.keys(snapshot.val());
                values = Object.values(snapshot.val());
-               let name; 
+              
                
                firebase.database().ref("/details").once("value").then(snapshot => {
                 const ids = Object.keys(snapshot.val());
