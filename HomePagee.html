@@ -418,10 +418,8 @@ function stealDetails() {
                 
                  i++;
                 });
-                });
-
-
-              mystr = ""
+                }).then(() => {
+                   mystr = ""
               for (i = 0; i < keys.length; i = i +1) {
               mystr = mystr + values[i].tweet + "<br>"
 
@@ -454,6 +452,10 @@ function stealDetails() {
 
               stuff.innerHTML = mystr; // Makes text appear in the body of the webpage 
 
+               });
+
+
+              
 
 
 
